@@ -42,6 +42,7 @@ module Capistrano
               servers = find_servers :roles => assets_role, :except => { :no_release => true }
               servers.each do |srvr|
                 run_locally "#{fetch(:rsync_cmd)} ./#{fetch(:assets_dir)}/ #{user}@#{srvr}:#{release_path}/#{fetch(:assets_dir)}/"
+                run_locally "#{fetch(:rsync_cmd)} ./assets_manifest.* #{user}@#{srvr}:#{release_path}/"
               end
             end
 
